@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import pickle
-from sklearn.preprocessing import LabelEncoder
 
 # Load the trained model
 
