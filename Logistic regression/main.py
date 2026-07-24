@@ -1,14 +1,18 @@
 import streamlit as st
 import pandas as pd
 import pickle
+import os
+
+# Get the directory of the current file
+current_dir = os.path.dirname(os.path.abspath(__file__))
+model_path = os.path.join(current_dir, 'titanic_model.pkl')
 
 # Load the trained model
-
 try:
-    with open('titanic_model.pkl', 'rb') as f:
+    with open(model_path, 'rb') as f:
         model = pickle.load(f)
 except FileNotFoundError:
-    st.error("Error: 'titanic_model.pkl' not found. Please ensure the model file is in the same directory as the app.")
+    st.error(f"Error: 'titanic_model.pkl' not found at {model_path}. Please ensure the model file is in the same directory as the app.")
     st.stop()
 
 # Streamlit App Title
@@ -78,8 +82,9 @@ if st.sidebar.button('Predict Survival'):
 
 st.write("\n---\n")
 st.write("**How to run this application:**")
-st.write("1. Save this code as a Python file (e.g., `app.py`) in the same directory as your `titanic_model.pkl` file.")
+st.write("1. Ensure both `main.py` and `titanic_model.pkl` are in the same directory.")
 st.write("2. Open a terminal or command prompt.")
-st.write("3. Navigate to the directory where you saved `app.py` and `titanic_model.pkl`.")
-st.write("4. Run the command: `streamlit run app.py`")
-st.write("5. Your browser will automatically open the Streamlit application.")
+st.write("3. Navigate to the directory where you saved the files.")
+st.write("4. Install required packages: `pip install streamlit pandas scikit-learn`")
+st.write("5. Run the command: `streamlit run main.py`")
+st.write("6. Your browser will automatically open the Streamlit application.")
